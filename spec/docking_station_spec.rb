@@ -56,11 +56,10 @@ describe DockingStation do
 
 
 
-    it "broken bikes are still allowed to be docked" do
-      pending "To satisfy this test, approach reporting differently eg.use Bike class"
+    it "broken bikes are reported when docked" do
       bike = Bike.new
-      subject.dock(subject.report(bike)) #dock and report broken bike
-      expect(subject.bikes).to eq bike
+      subject.dock(bike.report) #dock and report broken bike
+      expect(bike).not_to be_working
     end
   end
 

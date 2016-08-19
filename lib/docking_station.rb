@@ -30,10 +30,9 @@ DEFAULT_CAPACITY = 20
 #def bikes
 #  @bikes
 #end
-attr_reader :bikes
-
   private
 
+  attr_reader :bikes
 
   def full?
     bikes.count >= @capacity

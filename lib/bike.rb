@@ -10,6 +10,8 @@ class Bike
     @working
   end
 
+  #protected
+
   def report
     @working = false
   end
