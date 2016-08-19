@@ -3,13 +3,16 @@ require 'rspec/its'
 
 describe DockingStation do
 
+let(:bike) {double:bike}
+
   it "when asking DockingStation to release_bike, a bike is released" do
     expect(subject).to respond_to(:release_bike) #WHy do we need to pass the release_bike method as a symbol
   end
 
   it "released working bikes" do
-    bike = double(:bike) #NEED DOUBLE?
-    expect(bike).to be_working
+    allow(bike).to receive(:working?).and_return(true)
+    subject.dock(bike)#NEED DOUBLE?
+    expect(subject.release_bike).to be_working
   end
 
   it "docks bike at docking station" do
@@ -30,13 +33,13 @@ describe DockingStation do
 
   describe "#release_bike" do
     it "releases a bike" do
-      bike = double(:bike) #NEED DOUBLE?
+      bike = double(:bike, :working? => true) #NEED DOUBLE?
       subject.dock(bike)
       expect(subject.release_bike).to eq bike
     end
 
     it "should not release a broken bike" do
-      bike = double(:bike) #NEED DOUBLE?
+      bike = double(:bike, :report => false, :working? => false) #NEED DOUBLE?
       subject.dock(bike.report)
       expect { subject.release_bike }.to raise_error "no working bikes available"
     end
