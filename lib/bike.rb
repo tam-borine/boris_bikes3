@@ -14,5 +14,6 @@ class Bike
 
   def report
     @working = false
+    self
   end
 end

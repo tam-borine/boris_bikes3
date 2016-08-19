@@ -37,9 +37,11 @@ describe DockingStation do
 
     it "should not release a broken bike" do
       bike = Bike.new
-      subject.dock(subject.report(bike))
+      bike.report
+      subject.dock(bike)
       expect { subject.release_bike }.to raise_error "bike broken"
     end
+
 
     it "raises an error when there are no bikes available" do
 #because we don't dock any bikes in this test, there should be none available
@@ -52,6 +54,19 @@ describe DockingStation do
     it "raises error when there is no more capacity" do
         DockingStation::DEFAULT_CAPACITY.times {subject.dock Bike.new}
       expect { subject.dock(Bike.new) }.to raise_error "there is no capacity"
+    end
+
+    xit "only allows bike objects to be docked" do
+      bike = Bike.new
+      expect(subject.dock(bike.report)).to raise_error "please dock only bikes"
+    end
+
+
+    xit "forces bikes to be reported before docking not during" do
+      #given I want to report a broken bike when I dock
+      #when I go to dock and report
+      #if I try to do it simultaneously
+      #docking station tells me to report before docking
     end
 
 
