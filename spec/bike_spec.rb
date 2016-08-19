@@ -8,7 +8,8 @@ describe "Bike" do
 
   it "checks bikes can be reported as not working" do
     bike = Bike.new
-    expect(bike.report).not_to be working
+    bike.report
+    expect(bike).not_to be_working
   end
 
 end
