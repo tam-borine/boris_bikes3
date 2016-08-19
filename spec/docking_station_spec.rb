@@ -53,10 +53,8 @@ describe DockingStation do
         DockingStation::DEFAULT_CAPACITY.times {subject.dock Bike.new}
       expect { subject.dock(Bike.new) }.to raise_error "there is no capacity"
     end
-    it "checks bikes can be reported when docking" do
-      bike = Bike.new
-      subject.dock(subject.report(bike))
-    end
+
+
 
     it "broken bikes are still allowed to be docked" do
       pending "To satisfy this test, approach reporting differently eg.use Bike class"

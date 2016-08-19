@@ -45,7 +45,7 @@ I'd like docking stations not to accept more bikes than their capacity.
 As a system maintainer,
 So that I can plan the distribution of bikes,
 I want a docking station to have a default capacity of 20 bikes.
-=TESTED ffor
+=TESTED for
 
 As a system maintainer,
 So that busy areas can be served more effectively,
