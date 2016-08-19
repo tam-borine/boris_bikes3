@@ -56,19 +56,10 @@ describe DockingStation do
       expect { subject.dock(Bike.new) }.to raise_error "there is no capacity"
     end
 
-    xit "only allows bike objects to be docked" do
+    it "only allows bike objects to be docked" do
       bike = Bike.new
-      expect(subject.dock(bike.report)).to raise_error "please dock only bikes"
+      expect(subject.dock(bike.report)).to include a_kind_of Bike
     end
-
-
-    xit "forces bikes to be reported before docking not during" do
-      #given I want to report a broken bike when I dock
-      #when I go to dock and report
-      #if I try to do it simultaneously
-      #docking station tells me to report before docking
-    end
-
 
 
     it "broken bikes are reported when docked" do
