@@ -8,7 +8,7 @@ describe DockingStation do
   end
 
   it "released working bikes" do
-    bike = Bike.new
+    bike = double(:bike) #NEED DOUBLE?
     expect(bike).to be_working
   end
 
@@ -17,26 +17,26 @@ describe DockingStation do
     end
 
   it "docks the particular bike" do
-    bike = Bike.new
+    bike = double(:bike) #NEED DOUBLE?
     expect(subject.dock(bike)).to eq [bike] #this test only works when one bike exists
   end
 
   it "the particular is bike I've docked is amongst the docked bikes" do
-    bike1 = Bike.new
-    bike2 = Bike.new
+    bike1 = double(:bike) #NEED DOUBLE?
+    bike2 = double(:bike)
     subject.dock(bike1)
     expect(subject.dock(bike2)).to include bike1
   end
 
   describe "#release_bike" do
     it "releases a bike" do
-      bike = Bike.new
+      bike = double(:bike) #NEED DOUBLE?
       subject.dock(bike)
       expect(subject.release_bike).to eq bike
     end
 
     it "should not release a broken bike" do
-      bike = Bike.new
+      bike = double(:bike) #NEED DOUBLE?
       subject.dock(bike.report)
       expect { subject.release_bike }.to raise_error "no working bikes available"
     end
@@ -49,14 +49,14 @@ describe DockingStation do
 
 
   describe "#dock" do
-    it "raises error when there is no more capacity" do
-        DockingStation::DEFAULT_CAPACITY.times {subject.dock Bike.new}
-      expect { subject.dock(Bike.new) }.to raise_error "there is no capacity"
+    it "raises error when there is no more capacity" do #NEED DOUBLE?
+        DockingStation::DEFAULT_CAPACITY.times {subject.dock double(:bike)}
+      expect { subject.dock(double(:bike)) }.to raise_error "there is no capacity"
     end
 
     it "broken bikes are still allowed to be docked" do
       #pending "To satisfy this test, approach reporting differently eg.use Bike class"
-      bike = Bike.new
+      bike = double(:bike) #NEED DOUBLE?
        #dock and report broken bike
       expect(subject.dock(bike.report)).to include bike
     end
