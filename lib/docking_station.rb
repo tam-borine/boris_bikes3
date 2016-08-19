@@ -17,8 +17,19 @@ DEFAULT_CAPACITY = 20
 
   def release_bike
     fail "no bikes available" if station_empty?
-    #fail "bike broken" unless working?
-    @bikes.pop
+    # working?
+
+    @bikes.each do |bike|
+
+      if bike.working?
+        return @bikes.delete(bike)
+        break
+      else
+        fail "no working bikes available"
+      end
+
+    end
+
   end
 
 

@@ -37,11 +37,9 @@ describe DockingStation do
 
     it "should not release a broken bike" do
       bike = Bike.new
-      bike.report
-      subject.dock(bike)
-      expect { subject.release_bike }.to raise_error "bike broken"
+      subject.dock(bike.report)
+      expect { subject.release_bike }.to raise_error "no working bikes available"
     end
-
 
     it "raises an error when there are no bikes available" do
 #because we don't dock any bikes in this test, there should be none available
@@ -56,16 +54,11 @@ describe DockingStation do
       expect { subject.dock(Bike.new) }.to raise_error "there is no capacity"
     end
 
-    it "only allows bike objects to be docked" do
+    it "broken bikes are still allowed to be docked" do
+      #pending "To satisfy this test, approach reporting differently eg.use Bike class"
       bike = Bike.new
-      expect(subject.dock(bike.report)).to include a_kind_of Bike
-    end
-
-
-    it "broken bikes are reported when docked" do
-      bike = Bike.new
-      subject.dock(bike.report) #dock and report broken bike
-      expect(bike).not_to be_working
+       #dock and report broken bike
+      expect(subject.dock(bike.report)).to include bike
     end
   end
 
